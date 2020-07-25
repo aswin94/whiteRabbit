@@ -23,7 +23,6 @@ class Home extends Component
 
     componentDidMount() {
         let users = JSON.parse(localStorage.getItem('userData'));
-        console.log(users, 'users');
         if (users) {
             this.setState({
             users
