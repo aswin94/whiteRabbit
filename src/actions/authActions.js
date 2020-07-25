@@ -5,6 +5,7 @@ export const signIn = (credentials) => {
     };
     return (dispatch, getState) => {
         if (userData.username===credentials.username && userData.password===credentials.password) {
+            console.log('success');
             dispatch({type: 'LOGIN_SUCCESS'})
         } else dispatch({type: 'AUTH_FAILURE'});
     }

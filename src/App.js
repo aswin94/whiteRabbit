@@ -7,11 +7,11 @@ import SignIn from './components/auth/signIn';
 
 export class App extends Component {
   render() {
-    // const {location} = this.props;
-    // console.log(location, 'location');
+    const {location} = this.props;
+    console.log(location, 'location');
     return (
       <div>
-        <Switch>
+        <Switch location={location}>
           <Route exact path = '/' component = {SignIn} />
           {/* <Route exact path = "/" render={props => <SignIn {...props} />} /> */}
           {/* <Route path = '/home' component = {Home} /> */}

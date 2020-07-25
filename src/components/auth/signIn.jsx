@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {signIn} from '../../actions/authActions'
 import {Redirect} from 'react-router-dom'
 import {Row, Col, Button, Alert} from 'reactstrap'
+import './auth.css';
 
 class SignIn extends Component
 {
@@ -35,7 +36,7 @@ class SignIn extends Component
     render() {
         const { authError, auth } = this.props;
 
-        if(auth) return <Redirect to='/' />
+        if(auth) return <Redirect to='/home' />
 
         return(
             <div>
@@ -43,8 +44,8 @@ class SignIn extends Component
                     <p className="auth-para">Welcome back! Please login to your account</p>
                         <form className = "auth-form">
                             <div className = "input-field">
-                                <label htmlFor = "email">Email</label>
-                                <input id = "email" type = "email" onChange = {this.handleInputChange} />
+                                <label htmlFor = "username">Username</label>
+                                <input id = "username" type = "text" onChange = {this.handleInputChange} />
                             </div>
                             <div className = "input-field">
                                 <label htmlFor = "password">Password</label>
@@ -55,14 +56,14 @@ class SignIn extends Component
                                     <Button onClick={this.handleSignIn} variant="contained">Login</Button>
                                 </Col>
                             </Row>
-                                { authError === 'Login Failed' ? 
+                                {/* { authError === 'Login Failed' ? 
                                     <Alert
                                         message="Error"
                                         description={authError}
                                         type="error"
                                         showIcon
                                         closable
-                                    /> : null }
+                                    /> : null } */}
                         </form>
                     </div>
             </div>
