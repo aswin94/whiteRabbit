@@ -5,28 +5,36 @@ import {Redirect} from 'react-router-dom'
 import moment from 'moment';
 import {Row, Col, Button, Container, Input,
     Card, CardImg, CardText, CardBody,
-    CardTitle} from 'reactstrap'
+    CardTitle, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
 
 class Home extends Component
 {
     state = {
         users: [],
         search: '',
+        modal: false,
+        name: {
+            sal: '',
+            fname: '',
+            lname: '',
+        },
+        gender: '',
     }
 
     componentDidMount() {
         let users = JSON.parse(localStorage.getItem('userData'));
+        console.log(users, 'users');
         if (users) {
             this.setState({
             users
             });
         } else {
             localStorage.clear();
-            this.getPatients();
+            this.getUsers();
         }
     }
 
-    getPatients = () => {
+    getUsers = () => {
         return this.fetchPost().then(([response,json]) => {
             console.log(response);
             console.log(json, 'data');
@@ -54,10 +62,14 @@ class Home extends Component
             [event.target.id]: event.target.value
         })
     }
+    toggle = () => {
+        const {modal} = this.state;
+        this.setState({modal: !modal});
+    }
 
     render() {
         const { auth } = this.props;
-        const {users, search} = this.state;
+        const {users, search, modal} = this.state;
         console.log(search, 'users');
         const re = RegExp(`.*${search.toLowerCase().split('').join('.*')}.*`)
         if(!auth) return <Redirect to='/' />
@@ -71,7 +83,7 @@ class Home extends Component
                             <Input id="search" placeholder="Search by username" onChange = {this.handleInputChange}/>
                         </Col>
                         <Col xs={6}>
-                            <Button outline color="primary">Add User</Button>
+                            <Button outline color="primary" onClick={this.toggle}>Add User</Button>
                         </Col>
                     </Row>
                     <Row>
@@ -118,6 +130,26 @@ class Home extends Component
                         })
                         }
                     </Row>
+                    <div>
+                        <Modal isOpen={modal}>
+                            <ModalHeader toggle={this.toggle}>Add User</ModalHeader>
+                                <ModalBody>
+                                    <Row>
+                                        <Col xs={1}>Name</Col> {''}
+                                        <Col xs={3}><Input id="sal" placeholder="MR/MRS" onChange = {this.handleInputChange}/></Col>
+                                        <Col xs={4}><Input id="fname" placeholder="First Name" onChange = {this.handleInputChange}/></Col>
+                                        <Col xs={4}><Input id="lname" placeholder="Last Name" onChange = {this.handleInputChange}/></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>Gender <Input id="gender" placeholder="Gender" onChange = {this.handleInputChange}/></Col>
+                                    </Row>  
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color="primary">Add User</Button>{' '}
+                                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                                </ModalFooter>
+                        </Modal>
+                    </div>
                 </Container>
             </>
         );

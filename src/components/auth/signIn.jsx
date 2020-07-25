@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import {signIn} from '../../actions/authActions'
 import {Redirect} from 'react-router-dom'
-import {Row, Col, Button, Alert, Container} from 'reactstrap'
+import {Row, Col, Button, Container} from 'reactstrap'
 import './auth.css';
 
 class SignIn extends Component
