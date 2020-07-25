@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter} from 'react-router-dom'
 
 import SignIn from './components/auth/signIn';
-// import Home from './components/home/homePage';
+import Home from './components/home/homePage';
 
 
 export class App extends Component {
@@ -14,7 +14,7 @@ export class App extends Component {
         <Switch location={location}>
           <Route exact path = '/' component = {SignIn} />
           {/* <Route exact path = "/" render={props => <SignIn {...props} />} /> */}
-          {/* <Route path = '/home' component = {Home} /> */}
+          <Route path = '/home' component = {Home} />
         </Switch>
       </div> 
     );
